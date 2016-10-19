@@ -22,7 +22,9 @@ begin
 {
     $ApiVersion = 'v0'
     $BaseUrl = 'https://dashboard.meraki.com/api'
-    $Headers = @{"X-Cisco-Meraki-API-Key"="$key"}
+    $Headers = @{
+        'X-Cisco-Meraki-API-Key'=$key
+        'Content-Type: application/json'}
 
     function New-MerakiNetwork
     {
