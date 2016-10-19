@@ -20,8 +20,8 @@ param (
 
 begin
 {
-    $Api = 'v0'
-    $BaseUrl = 'https://dashboard.meraki.com'
+    $ApiVersion = 'v0'
+    $BaseUrl = 'https://dashboard.meraki.com/api/'
     $Headers = @{"X-Cisco-Meraki-API-Key"="$key"}
 
     function New-MerakiNetwork
@@ -42,7 +42,7 @@ begin
             "timeZone" = 'America/New_York'
         }
 
-        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$Api/$Organization/networks" -Body $Body
+        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/$Organization/networks" -Body $Body
     }
 
     function Remove-MerakiNetwork
