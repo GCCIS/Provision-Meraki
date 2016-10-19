@@ -44,7 +44,7 @@ begin
             "timeZone" = 'America/New_York'
         }
 
-        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$Api/$Organization/networks" -Body "{`"name`": }"
+        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$Api/$Organization/networks" -Body $Body
     }
 
     function Remove-MerakiNetwork
