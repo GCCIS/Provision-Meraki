@@ -1,5 +1,5 @@
 <#
-	.SYNOPSIS
+    .SYNOPSIS
 	
     .DESCRIPTION
 	
@@ -27,6 +27,35 @@ begin
         'X-Cisco-Meraki-API-Key' = $key
         'Content-Type' = 'application/json'}
 
+    function Get-OrganizationUrl
+    {
+        # Get info about the organization to trigger a 302
+        $Response = Invoke-WebRequest -Headers $Headers -Method Get -Uri "$BaseUrl/$ApiVersion/organizations/$Organization" -MaximumRedirection 0 -ErrorAction SilentlyContinue
+        
+        # If we get a 302, return the new URL. Else return the original $BaseUrl
+        if ($Response.StatusCode -eq 302)
+        {
+            # Capture the URL, but not the version and organization
+            # If the capture is successful, return it
+            $Url = Select-String -Pattern "^(.*)/$ApiVersion/organizations/$Organization$" -InputObject ([String] $Response.Headers.Location)
+            $RedirectedUrl = $Url.Matches.Groups[1].Value
+            if ($RedirectedUrl)
+            {
+                return $RedirectedUrl
+            }
+
+            else 
+            {
+                return $BaseUrl
+            }
+        }
+
+        else
+        {
+            return $BaseUrl
+        }
+    }
+
     function New-MerakiNetwork
     {
         param (
@@ -45,17 +74,8 @@ begin
             "timeZone" = 'America/New_York'
         }
 
-        #Invoke-RestMethod -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body) -ContentType 'application/json'
-        try {
-            $Response = Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body) -ContentType 'application/json'
-        }
-
-        catch {
-            $Error = $_.Exception
-        }
-
-        $Error.Response
-        $Error.Message
+        Get-OrganizationUrl
+        #$Response = Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body)
     }
 
     function Remove-MerakiNetwork
