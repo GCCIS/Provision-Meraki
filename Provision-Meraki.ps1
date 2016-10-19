@@ -8,6 +8,7 @@
     .EXAMPLE
 	
 	.LINK
+    https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Provisioning_API
 
 #>
 param (
@@ -22,7 +23,9 @@ begin
 {
     $ApiVersion = 'v0'
     $BaseUrl = 'https://dashboard.meraki.com/api'
-    $Headers = @{'X-Cisco-Meraki-API-Key' = $key}
+    $Headers = @{
+        'X-Cisco-Meraki-API-Key' = $key
+        'Content-Type' = 'application/json'}
 
     function New-MerakiNetwork
     {
@@ -42,7 +45,17 @@ begin
             "timeZone" = 'America/New_York'
         }
 
-        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body $Body
+        #Invoke-RestMethod -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body) -ContentType 'application/json'
+        try {
+            $Response = Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body) -ContentType 'application/json'
+        }
+
+        catch {
+            $Error = $_.Exception
+        }
+
+        $Error.Response
+        $Error.Message
     }
 
     function Remove-MerakiNetwork
@@ -55,5 +68,5 @@ begin
 process
 {
     # Test the function
-    New-MerakiNetwork -Name 'Test_Net' -Type 'switch'
+    New-MerakiNetwork -Name 'TestNet' -Type 'switch'
 }
