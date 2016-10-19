@@ -42,7 +42,7 @@ begin
             "timeZone" = 'America/New_York'
         }
 
-        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/$Organization/networks" -Body $Body
+        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks" -Body $Body
     }
 
     function Remove-MerakiNetwork
