@@ -12,11 +12,9 @@
 #>
 param (
     [Parameter(Position = 0, Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-    [ValidateNotNullOrEmpty]
     [String] $Key,
 
     [Parameter(Position = 1, Mandatory = $true, ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $false)]
-    [ValidateNotNullOrEmpty]
     [String] $Organization
 )
 
@@ -56,5 +54,6 @@ begin
 
 process
 {
-    
+    # Test the function
+    New-MerakiNetwork -Name 'Test_Net' -Type 'switch'
 }
