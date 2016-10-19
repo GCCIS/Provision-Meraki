@@ -30,10 +30,21 @@ begin
     {
         param (
             [Parameter(Position = 0, Mandatory = $true)]
-            [String] $Name
+            [String] $Name,
+
+            [Parameter(Position = 1, Mandatory = $true)]
+            [ValidateSet('wireless', 'switch', 'appliance', 'phone')]
+            [String] $Type
         )
 
-        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$Api/$Organization/networks"
+        $Body = @{
+            "name" = "$Name"
+            "type" = "$type"
+            "tags" = ''
+            "timeZone" = 'America/New_York'
+        }
+
+        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$BaseUrl/$Api/$Organization/networks" -Body "{`"name`": }"
     }
 
     function Remove-MerakiNetwork
