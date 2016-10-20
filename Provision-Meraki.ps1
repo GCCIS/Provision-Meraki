@@ -70,27 +70,27 @@ begin
         },
 
         @{
-            'name' = 'Endor 1-3'
+            'name' = 'NetLab Endor 1-3'
         },
 
         @{
-            'name' = 'Endor 4-6'
+            'name' = 'NetLab Endor 4-6'
         },
 
         @{
-            'name' = 'Tatooine 1-3'
+            'name' = 'NetLab Tatooine 1-3'
         },
 
         @{
-            'name' = 'Tatooine 4-6'
+            'name' = 'NetLab Tatooine 4-6'
         },
 
         @{
-            'name' = 'Yavin 1-3'
+            'name' = 'NetLab Yavin 1-3'
         },
 
         @{
-            'name' = 'Yavin 4-6'
+            'name' = 'NetLab Yavin 4-6'
         }
     )
 
