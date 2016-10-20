@@ -25,15 +25,73 @@ begin
     $BaseUrl = 'https://dashboard.meraki.com/api'
     $Headers = @{
         'X-Cisco-Meraki-API-Key' = $key
-        'Content-Type' = 'application/json'}
+        'Content-Type' = 'application/json'
+    }
     
     $Networks = @(
         @{
-            'name' = 'NetLab Alderaan 1-3'},
+            'name' = 'NetLab Alderaan 1-3'
+        },
+
         @{
-            'name' = 'NetLab Alderaan 4-6'},
+            'name' = 'NetLab Alderaan 4-6'
+        },
+
         @{
-            'name' = 'NetLab Naboo 1-3'}
+            'name' = 'NetLab Naboo 1-3'
+        },
+        
+        @{
+            'name' = 'NetLab Naboo 4-6'
+        },
+
+        @{
+            'name' = 'NetLab Dagobah 1-3'
+        },
+
+        @{
+            'name' = 'NetLab Dagobah 4-6'
+        },
+
+        @{
+            'name' = 'NetLab Bespin 1-3'
+        },
+
+        @{
+            'name' = 'NetLab Bespin 4-6'
+        },
+
+        @{
+            'name' = 'NetLab Hoth 1-3'
+        },
+
+        @{
+            'name' = 'NetLab Hoth 4-6'
+        },
+
+        @{
+            'name' = 'Endor 1-3'
+        },
+
+        @{
+            'name' = 'Endor 4-6'
+        },
+
+        @{
+            'name' = 'Tatooine 1-3'
+        },
+
+        @{
+            'name' = 'Tatooine 4-6'
+        },
+
+        @{
+            'name' = 'Yavin 1-3'
+        },
+
+        @{
+            'name' = 'Yavin 4-6'
+        }
     )
 
     function Get-RedirectedUrl
