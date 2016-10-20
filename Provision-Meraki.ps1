@@ -114,5 +114,8 @@ begin
 
 process
 {
-    
+    # Remove all existing networks
+    Get-MerakiNetwork | ForEach-Object {
+        Remove-MerakiNetwork -Id $_.Id
+    }
 }
