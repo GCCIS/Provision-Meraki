@@ -127,4 +127,10 @@ process
     Get-MerakiNetwork | ForEach-Object {
         Remove-MerakiNetwork -Id $_.Id
     }
+
+    # Create the new networks
+    foreach ($Network in $Networks)
+    {
+        New-MerakiNetwork -Name $Network.name -Type 'switch'
+    }
 }
