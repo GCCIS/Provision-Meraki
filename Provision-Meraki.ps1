@@ -26,6 +26,15 @@ begin
     $Headers = @{
         'X-Cisco-Meraki-API-Key' = $key
         'Content-Type' = 'application/json'}
+    
+    $Networks = @(
+        @{
+            'name' = 'NetLab Alderaan 1-3'},
+        @{
+            'name' = 'NetLab Alderaan 4-6'},
+        @{
+            'name' = 'NetLab Naboo 1-3'}
+    )
 
     function Get-RedirectedUrl
     {
