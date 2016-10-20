@@ -78,6 +78,26 @@ begin
         Invoke-WebRequest -Headers $Headers -Method Post -Uri "$Url/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body)
     }
 
+    function Get-MerakiNetwork
+    {
+        param (
+            [Parameter(Position = 0, Mandatory = $false)]
+            [String] $Id
+        )
+
+        if ($Id)
+        {
+            $Results = Invoke-WebRequest -Headers $Headers -Method Get -Uri "$BaseUrl/$ApiVersion/networks/$Id"
+            return (ConvertFrom-Json -InputObject $Results)
+        }
+
+        else
+        {
+            $Results = Invoke-WebRequest -Headers $Headers -Method Get -Uri "$BaseUrl/$ApiVersion/organizations/$Organization/networks"
+            return (ConvertFrom-Json -InputObject $Results)
+        }
+    }
+
     function Remove-MerakiNetwork
     {
         param (

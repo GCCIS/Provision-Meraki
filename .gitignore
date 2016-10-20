@@ -18,7 +18,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # VS Code
+.vscode
 launch.json
+settings.json
 
 # =========================
 # Operating System Files
