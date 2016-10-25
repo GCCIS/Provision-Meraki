@@ -147,12 +147,12 @@ begin
         # Check to make sure an HTTP/201 was returned
         if ($Results.StatusCode -eq 201)
         {
-            Write-Host -ForegroundColor Green "[Network] $Id successfully created"
+            Write-Host -ForegroundColor Green "[Network] $Name successfully created"
         }
 
         else
         {
-            Write-Host -ForegroundColor Red "[Network] ERROR: Cannot create network $Id. HTTP/$($Results.StatusCode)"   
+            Write-Host -ForegroundColor Red "[Network] ERROR: Cannot create network $Name. HTTP/$($Results.StatusCode)"   
         }
 
         # Sleep for .5 seconds
