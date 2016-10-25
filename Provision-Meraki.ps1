@@ -142,7 +142,21 @@ begin
         }
 
         $Url = Get-RedirectedUrl
-        Invoke-WebRequest -Headers $Headers -Method Post -Uri "$Url/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body)
+        $Results = Invoke-WebRequest -Headers $Headers -Method Post -Uri "$Url/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body)
+
+        # Check to make sure an HTTP/201 was returned
+        if ($Results.StatusCode -eq 201)
+        {
+            Write-Host -ForegroundColor Green "[Network] $Id successfully created"
+        }
+
+        else
+        {
+            Write-Host -ForegroundColor Red "[Network] ERROR: Cannot create network $Id. HTTP/$($Results.StatusCode)"   
+        }
+
+        # Sleep for .5 seconds
+        Start-Sleep -Milliseconds 500
     }
 
     function Get-MerakiNetwork
