@@ -174,7 +174,21 @@ begin
 
         # Need the real URL for this, or else we get a 308
         $Url = Get-RedirectedUrl
-        Invoke-WebRequest -Headers $Headers -Method Delete -Uri "$Url/$ApiVersion/networks/$Id"
+        $Results = Invoke-WebRequest -Headers $Headers -Method Delete -Uri "$Url/$ApiVersion/networks/$Id" -ErrorAction SilentlyContinue
+
+        # Check to make sure an HTTP/204 was returned
+        if ($Results.StatusCode -eq 204)
+        {
+            Write-Host -ForegroundColor Green "[Network] $Id successfully removed"
+        }
+
+        else
+        {
+            Write-Host -ForegroundColor Red "[Network] ERROR: Cannot delete network $Id. HTTP/$($Results.StatusCode)"    
+        }
+
+        # Sleep for .5 seconds
+        Start-Sleep -Milliseconds 500
     }
 
 }
