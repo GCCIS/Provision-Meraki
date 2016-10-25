@@ -142,7 +142,7 @@ begin
         }
 
         $Url = Get-RedirectedUrl
-        $Results = Invoke-WebRequest -Headers $Headers -Method Post -Uri "$Url/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body)
+        $Results = Invoke-WebRequest -Headers $Headers -Method Post -Uri "$Url/$ApiVersion/organizations/$Organization/networks" -Body (ConvertTo-Json -InputObject $Body) -ErrorAction SilentlyContinue
 
         # Check to make sure an HTTP/201 was returned
         if ($Results.StatusCode -eq 201)
